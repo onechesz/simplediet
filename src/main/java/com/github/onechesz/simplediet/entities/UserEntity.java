@@ -18,6 +18,7 @@ public class UserEntity {
     @Column(name = "password")
     @Size(min = 7, max = 32, message = "Пароль должен состоять как минимум из 7-ми символов.")
     private String password;
+    @Transient
     private String confirmedPassword;
     @Column(name = "role")
     private String role;
