@@ -30,7 +30,7 @@ public class ProductEntity {
     @OneToMany(mappedBy = "productEntity")
     private List<CartEntity> cartEntities;
     @OneToMany(mappedBy = "productEntity")
-    private List<OrdersProductsEntity> ordersProductsEntities;
+    private List<OrderProductEntity> ordersProductsEntities;
 
     public ProductEntity() {
     }

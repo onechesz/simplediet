@@ -1,7 +1,7 @@
 package com.github.onechesz.simplediet.services;
 
 import com.github.onechesz.simplediet.entities.OrderEntity;
-import com.github.onechesz.simplediet.entities.OrdersProductsEntity;
+import com.github.onechesz.simplediet.entities.OrderProductEntity;
 import com.github.onechesz.simplediet.entities.ProductEntity;
 import com.github.onechesz.simplediet.entities.UserEntity;
 import com.github.onechesz.simplediet.repositories.OrderRepository;
@@ -44,7 +44,7 @@ public class OrderService {
         List<ProductEntity> productEntities = new ArrayList<>(cartService.findAllByUserId(userId));
 
         for (ProductEntity productEntity : productEntities)
-            ordersProductsRepository.save(new OrdersProductsEntity(orderEntity, productEntity));
+            ordersProductsRepository.save(new OrderProductEntity(orderEntity, productEntity));
 
         userEntity.ifPresent(cartService::clean);
     }

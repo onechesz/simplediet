@@ -20,7 +20,7 @@ public class OrderEntity {
     @Column(name = "status")
     private String status;
     @OneToMany(mappedBy = "orderEntity")
-    private List<OrdersProductsEntity> ordersProductsEntities;
+    private List<OrderProductEntity> ordersProductsEntities;
 
     public OrderEntity() {
 
@@ -58,11 +58,11 @@ public class OrderEntity {
         this.status = status;
     }
 
-    public List<OrdersProductsEntity> getOrdersProductsEntities() {
+    public List<OrderProductEntity> getOrdersProductsEntities() {
         return ordersProductsEntities;
     }
 
-    public void setOrdersProductsEntities(List<OrdersProductsEntity> ordersProductsEntities) {
+    public void setOrdersProductsEntities(List<OrderProductEntity> ordersProductsEntities) {
         this.ordersProductsEntities = ordersProductsEntities;
     }
 }

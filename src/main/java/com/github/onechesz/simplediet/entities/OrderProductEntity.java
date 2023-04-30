@@ -5,8 +5,8 @@ import jakarta.persistence.*;
 import org.jetbrains.annotations.NotNull;
 
 @Entity
-@Table(name = "orders_products")
-public class OrdersProductsEntity {
+@Table(name = "order_product")
+public class OrderProductEntity {
     @EmbeddedId
     private OrdersProductsKey id;
     @ManyToOne
@@ -18,11 +18,11 @@ public class OrdersProductsEntity {
     @JoinColumn(name = "product_id")
     private ProductEntity productEntity;
 
-    public OrdersProductsEntity() {
+    public OrderProductEntity() {
 
     }
 
-    public OrdersProductsEntity(@NotNull OrderEntity orderEntity, @NotNull ProductEntity productEntity) {
+    public OrderProductEntity(@NotNull OrderEntity orderEntity, @NotNull ProductEntity productEntity) {
         id = new OrdersProductsKey(orderEntity.getId(), productEntity.getId());
         this.orderEntity = orderEntity;
         this.productEntity = productEntity;
