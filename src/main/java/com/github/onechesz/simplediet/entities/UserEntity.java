@@ -1,6 +1,7 @@
 package com.github.onechesz.simplediet.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 
 import java.util.List;
 
@@ -12,9 +13,12 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name = "username")
+    @Size(min = 4, max = 256, message = "Имя пользователя должно содержать не менее 4-х символов.")
     private String username;
     @Column(name = "password")
+    @Size(min = 7, max = 32, message = "Пароль должен состоять как минимум из 7-ми символов.")
     private String password;
+    private String confirmedPassword;
     @Column(name = "role")
     private String role;
     @OneToMany(mappedBy = "userEntity")
@@ -59,11 +63,35 @@ public class UserEntity {
         this.password = password;
     }
 
+    public String getConfirmedPassword() {
+        return confirmedPassword;
+    }
+
+    public void setConfirmedPassword(String confirmedPassword) {
+        this.confirmedPassword = confirmedPassword;
+    }
+
     public String getRole() {
         return role;
     }
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public List<CartEntity> getCartEntities() {
+        return cartEntities;
+    }
+
+    public void setCartEntities(List<CartEntity> cartEntities) {
+        this.cartEntities = cartEntities;
+    }
+
+    public List<OrderEntity> getOrderEntities() {
+        return orderEntities;
+    }
+
+    public void setOrderEntities(List<OrderEntity> orderEntities) {
+        this.orderEntities = orderEntities;
     }
 }
