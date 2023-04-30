@@ -1,0 +1,35 @@
+<html layout:decorate="~{layouts/layout}" xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Вход</title>
+	<link href="../../static/css/auth.css" media="all" rel="stylesheet" th:href="@{/css/auth.css}" type="text/css">
+</head>
+
+<body>
+<div id="register_ask" layout:fragment="sidebar">
+	<h3>Не зарегистрированы?</h3>
+
+	<form th:action="@{/auth/register}" th:method="GET">
+		<input type="submit" value="Регистрация">
+	</form>
+</div>
+
+<div layout:fragment="content">
+	<h1>Вход</h1>
+
+	<form class="auth" name="login_form" th:action="@{/login}" th:method="POST">
+		<input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" type="hidden">
+
+		<label for="username">Имя пользователя:</label>
+		<input id="username" name="username" type="text">
+
+		<label for="password">Пароль:</label>
+		<input id="password" name="password" type="password">
+
+		<input type="submit" value="Войти">
+
+		<p style="color: red" th:if="${param.error}">Неверные имя пользователя и/или пароль.</p>
+	</form>
+</div>
+</body>
+</html>

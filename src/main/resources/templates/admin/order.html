@@ -1,0 +1,37 @@
+<html layout:decorate="~{layouts/layout}" xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Информация о заказе</title>
+	<link href="../../static/css/orders.css" media="all" rel="stylesheet" th:href="@{/css/orders.css}" type="text/css">
+</head>
+
+<body>
+<div layout:fragment="sidebar">
+
+</div>
+
+<div layout:fragment="content">
+	<h1>Информация о заказе</h1>
+
+	<form class="admin_order" th:action="@{/admin/orders/{id}(id=${order.id})}" th:method="PATCH">
+		<p th:text="'Номер: ' + ${order.id}"></p>
+		<p><span>Заказчик: </span><a th:href="@{/users/{username}(username=${order.userEntity.username})}"
+		                             th:text="${order.userEntity.username}"></a></p>
+		<div>
+			<p>Статус:</p>
+			<select id="status" name="status">
+				<option th:selected="${'создан' == order.status}" th:text="создан"></option>
+				<option th:selected="${'обработан' == order.status}" th:text="обработан"></option>
+				<option th:selected="${'доставлен' == order.status}" th:text="доставлен"></option>
+				<option th:selected="${'завершён' == order.status}" th:text="завершён"></option>
+			</select>
+		</div>
+		<ul>
+			<li th:each="ordersProductsEntity : ${order.ordersProductsEntities}"
+			    th:text="${ordersProductsEntity.productEntity.title}"></li>
+		</ul>
+		<input type="submit" value="Сохранить">
+	</form>
+</div>
+</body>
+</html>
