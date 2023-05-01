@@ -1,7 +1,7 @@
 <html layout:decorate="~{layouts/layout}" xmlns:layout="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>Товары</title>
+	<title>Диеты</title>
 	<link href="../../static/css/products.css" media="all" rel="stylesheet" th:href="@{/css/products.css}"
 	      type="text/css">
 </head>
@@ -11,33 +11,33 @@
 	<h3>Поиск</h3>
 
 	<form id="search_form" th:action="@{/products}" th:method="GET">
-		<input id="search" name="search" placeholder="Название товара..." type="text">
-		<input id="from" name="from" placeholder="От (руб.)" type="text">
-		<input id="to" name="to" placeholder="До (руб.)" type="text">
+		<input id="search" name="search" placeholder="Название диеты..." type="text">
+		<input id="from" name="from" placeholder="От (дн.)" type="text">
+		<input id="to" name="to" placeholder="До (дн.)" type="text">
 
 		<label for="sort">сортировать по:</label>
 		<select id="sort" name="sort">
 			<option></option>
 			<option value="title">названию</option>
-			<option value="price">цене</option>
+			<option value="price">продолжительности</option>
 		</select>
 
 		<input type="submit" value="применить">
 	</form>
 
 	<form id="add_product_admin" sec:authorize="hasRole('ADMIN')" th:action="@{/products/add}" th:method="GET">
-		<input type="submit" value="Добавить товар (admin)">
+		<input type="submit" value="Добавить диету (admin)">
 	</form>
 </div>
 
 <div layout:fragment="content">
-	<h1>Товары</h1>
+	<h1>Диеты</h1>
 
 	<div class="products">
 		<div th:each="product : ${products}">
 			<img th:src="@{'/images/' + ${product.fileName}}" width="256px">
-			<p><a th:href="@{/products/{id}(id=${product.id})}" th:text="${product.title}">Товар</a></p>
-			<p th:text="${product.price} + ' руб.'">Цена</p>
+			<p><a th:href="@{/products/{id}(id=${product.id})}" th:text="${product.title}">Диета</a></p>
+			<p th:text="${product.price} + ' дн.'">Продолжительность</p>
 		</div>
 	</div>
 </div>

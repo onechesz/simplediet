@@ -37,7 +37,7 @@ public class OrderService {
 
         userEntity.ifPresent(orderEntity::setUserEntity);
         orderEntity.setCreatedAt(LocalDateTime.now());
-        orderEntity.setStatus("создан");
+        orderEntity.setStatus("процесс");
 
         orderRepository.save(orderEntity);
 

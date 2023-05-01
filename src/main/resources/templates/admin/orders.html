@@ -1,21 +1,21 @@
 <html layout:decorate="~{layouts/layout}" xmlns:layout="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>Все заказы</title>
+	<title>Все прогрессы</title>
 	<link href="../../static/css/orders.css" media="all" rel="stylesheet" th:href="@{/css/orders.css}" type="text/css">
 </head>
 
 <body>
 <div layout:fragment="sidebar">
 	<form id="search_form" th:action="@{/admin/orders}" th:method="GET">
-		<input id="search" name="search" placeholder="Номер заказа..." type="text">
+		<input id="search" name="search" placeholder="Номер прогресса..." type="text">
 
 		<input type="submit" value="применить">
 	</form>
 </div>
 
 <div layout:fragment="content">
-	<h1>Все заказы</h1>
+	<h1>Все прогрессы</h1>
 
 	<div class="orders">
 		<ul>

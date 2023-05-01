@@ -10,11 +10,11 @@
 
 <body>
 <ul class="index-list">
-	<li><a th:href="@{/products}">Товары</a></li>
+	<li><a th:href="@{/products}">Диеты</a></li>
 	<li sec:authorize="isAnonymous()"><a th:href="@{/auth/login}">Вход</a></li>
-	<li sec:authorize="isAuthenticated()"><a th:href="@{/cart}">Корзина</a></li>
-	<li sec:authorize="isAuthenticated()"><a th:href="@{/orders}">Заказы</a></li>
-	<li sec:authorize="hasRole('ADMIN')"><a th:href="@{/admin/orders}">Все заказы</a></li>
+	<li sec:authorize="isAuthenticated()"><a th:href="@{/cart}">Избранное</a></li>
+	<li sec:authorize="isAuthenticated()"><a th:href="@{/orders}">Прогресс</a></li>
+	<li sec:authorize="hasRole('ADMIN')"><a th:href="@{/admin/orders}">Все прогрессы</a></li>
 	<li	sec:authorize="isAuthenticated()"><a th:href="@{/profile}">Профиль</a></li>
 	<li sec:authorize="isAuthenticated()">
 		<form th:action="@{/logout}" th:method="POST">

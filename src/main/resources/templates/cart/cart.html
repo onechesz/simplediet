@@ -10,16 +10,16 @@
 	<h3>Действия</h3>
 
 	<form th:action="@{/cart/order}" th:method="GET">
-		<input type="submit" value="Оформить заказ">
+		<input type="submit" value="Начать прогресс">
 	</form>
 
 	<form th:action="@{/cart/clean}" th:method="GET">
-		<input type="submit" value="Очистить корзину">
+		<input type="submit" value="Очистить избранное">
 	</form>
 </div>
 
 <div layout:fragment="content">
-	<h1>Корзина</h1>
+	<h1>Избранное</h1>
 
 	<div class="cart">
 		<div th:each="product : ${products}">

@@ -1,7 +1,7 @@
 <html layout:decorate="~{layouts/layout}" xmlns:layout="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title th:text="${product_dtoo.title}">Редактировать товар</title>
+	<title th:text="${product_dtoo.title}">Редактировать диету</title>
 	<link href="../../static/css/auth.css" media="all" rel="stylesheet" th:href="@{/css/auth.css}" type="text/css">
 </head>
 
@@ -11,7 +11,7 @@
 </div>
 
 <div layout:fragment="content">
-	<h1>Редактировать товар</h1>
+	<h1>Редактировать диету</h1>
 
 	<form enctype="multipart/form-data" name="product_edit_form"
 	      th:action="@{/products/{id}/edit(id=${product_dtoo.id})}" th:method="PATCH" th:object="${product_dtio}">
@@ -22,14 +22,14 @@
 			<img th:src="@{'/images/' + ${product_dtoo.fileName}}" width="512px">
 		</label>
 
-		<label for="title">Назавание товара:</label>
+		<label for="title">Назавание диеты:</label>
 		<input id="title" name="title" th:value="${product_dtoo.title}" type="text">
 		<span style="color: red" th:errors="*{title}"
-		      th:if="@{#fields.hasErrors('title')}">Ошибки в названии товара.</span>
+		      th:if="@{#fields.hasErrors('title')}">Ошибки в названии диеты.</span>
 
-		<label for="price">Цена:</label>
+		<label for="price">Продолжительность:</label>
 		<input id="price" name="price" th:value="${product_dtoo.price}" type="text">
-		<span style="color: red" th:errors="*{price}" th:if="@{#fields.hasErrors('price')}">Ошибки в цене.</span>
+		<span style="color: red" th:errors="*{price}" th:if="@{#fields.hasErrors('price')}">Ошибки в продолжительности.</span>
 
 		<input type="submit" value="Обновить">
 	</form>
