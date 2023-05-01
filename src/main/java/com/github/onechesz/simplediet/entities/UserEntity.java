@@ -29,6 +29,9 @@ public class UserEntity {
     private List<CartEntity> cartEntities;
     @OneToMany(mappedBy = "userEntity")
     private List<OrderEntity> orderEntities;
+    @OneToOne(mappedBy = "userEntity", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private UserParams userParams;
 
     public UserEntity() {
 
@@ -107,17 +110,11 @@ public class UserEntity {
         this.orderEntities = orderEntities;
     }
 
-    @Override
-    public String toString() {
-        return "UserEntity{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", userPassword='" + userPassword + '\'' +
-                ", confirmedPassword='" + confirmedPassword + '\'' +
-                ", role='" + role + '\'' +
-                ", cartEntities=" + cartEntities +
-                ", orderEntities=" + orderEntities +
-                '}';
+    public UserParams getUserParams() {
+        return userParams;
+    }
+
+    public void setUserParams(UserParams userParams) {
+        this.userParams = userParams;
     }
 }
