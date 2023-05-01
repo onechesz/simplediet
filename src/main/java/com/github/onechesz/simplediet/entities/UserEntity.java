@@ -16,8 +16,11 @@ public class UserEntity {
     @Size(min = 4, max = 256, message = "Имя пользователя должно содержать не менее 4-х символов.")
     private String username;
     @Column(name = "password")
-    @Size(min = 7, max = 32, message = "Пароль должен состоять как минимум из 7-ми символов.")
     private String password;
+    @Transient
+    @Size(min = 7, message = "Пароль должен состоять как минимум из 7-ми символов.")
+    @Size(max = 32, message = "Пароль должен состоять максимум из 32-х символов.")
+    private String userPassword;
     @Transient
     private String confirmedPassword;
     @Column(name = "role")
@@ -64,6 +67,14 @@ public class UserEntity {
         this.password = password;
     }
 
+    public String getUserPassword() {
+        return userPassword;
+    }
+
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
+    }
+
     public String getConfirmedPassword() {
         return confirmedPassword;
     }
@@ -94,5 +105,19 @@ public class UserEntity {
 
     public void setOrderEntities(List<OrderEntity> orderEntities) {
         this.orderEntities = orderEntities;
+    }
+
+    @Override
+    public String toString() {
+        return "UserEntity{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", userPassword='" + userPassword + '\'' +
+                ", confirmedPassword='" + confirmedPassword + '\'' +
+                ", role='" + role + '\'' +
+                ", cartEntities=" + cartEntities +
+                ", orderEntities=" + orderEntities +
+                '}';
     }
 }

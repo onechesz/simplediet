@@ -17,7 +17,7 @@ public class UserFieldsValidator implements Validator {
     public void validate(@NotNull Object target, @NotNull Errors errors) {
         UserEntity userEntity = (UserEntity) target;
 
-        if (!userEntity.getPassword().equals(userEntity.getConfirmedPassword()))
+        if (!userEntity.getUserPassword().equals(userEntity.getConfirmedPassword()))
             errors.rejectValue("confirmedPassword", "", "Пароли должны совпадать.");
     }
 }

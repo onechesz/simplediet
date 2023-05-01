@@ -22,7 +22,9 @@ public class UserService {
 
     @Transactional
     public void save(@NotNull UserEntity userEntity) {
-        userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
+        System.out.println(userEntity);
+
+        userEntity.setPassword(passwordEncoder.encode(userEntity.getUserPassword()));
         userEntity.setRole("ROLE_USER");
 
         userRepository.save(userEntity);

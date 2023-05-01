@@ -20,10 +20,10 @@
 		<input id="username" name="username" th:field="*{username}" type="text">
 		<span style="color: red" th:errors="*{username}" th:if="@{#fields.hasErrors('username')}">Ошибки в имени пользователя.</span>
 
-		<label for="password">Пароль:</label>
-		<input id="password" name="password" th:field="*{password}" type="password">
-		<span style="color: red" th:errors="*{password}"
-		      th:if="@{#fields.hasErrors('password')}">Ошибки в пароле.</span>
+		<label for="user_password">Пароль:</label>
+		<input id="user_password" name="user_password" th:field="*{userPassword}" type="password">
+		<span style="color: red" th:errors="*{userPassword}"
+		      th:if="@{#fields.hasErrors('userPassword')}">Ошибки в пароле.</span>
 
 		<label for="confirmed_password">Подтверждения пароля:</label>
 		<input id="confirmed_password" name="confirmed_password" th:field="*{confirmedPassword}" type="password">
