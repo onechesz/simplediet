@@ -1,10 +1,10 @@
 package com.github.onechesz.simplediet.repositories;
 
-import com.github.onechesz.simplediet.entities.UserParams;
+import com.github.onechesz.simplediet.entities.UserParametersEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserParamsRepository extends JpaRepository<UserParams, Integer> {
+public interface UserParamsRepository extends JpaRepository<UserParametersEntity, Integer> {
 
 }

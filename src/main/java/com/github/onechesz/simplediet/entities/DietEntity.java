@@ -6,57 +6,55 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 @Entity
-@Table(name = "product")
-public class ProductEntity {
-    @Column(name = "id")
+@Table(name = "diet")
+public class DietEntity {
+    @Column(name = "id", nullable = false)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name = "file_name")
+    @Column(name = "file_name", nullable = false)
     private String fileName;
-    @Column(name = "file_path")
+    @Column(name = "file_path", nullable = false)
     private String filePath;
-    @Column(name = "file_type")
+    @Column(name = "file_type", nullable = false)
     private String fileType;
-    @Column(name = "file_size")
+    @Column(name = "file_size", nullable = false)
     private long fileSize;
-    @Column(name = "title")
+    @Column(name = "title", nullable = false)
     private String title;
-    @Column(name = "price")
-    private BigDecimal price;
-    @OneToMany(mappedBy = "productEntity")
-    private List<CartEntity> cartEntities;
-    @OneToMany(mappedBy = "productEntity")
-    private List<OrderProductEntity> ordersProductsEntities;
+    @Column(name = "duration", nullable = false)
+    private BigDecimal duration;
 
-    public ProductEntity() {
+    @Contract(pure = true)
+    public DietEntity() {
     }
 
-    public ProductEntity(String fileName, String filePath, String fileType, long fileSize, String title, BigDecimal price) {
+    @Contract(pure = true)
+    public DietEntity(String fileName, String filePath, String fileType, long fileSize, String title, BigDecimal duration) {
         this.fileName = fileName;
         this.filePath = filePath;
         this.fileType = fileType;
         this.fileSize = fileSize;
         this.title = title;
-        this.price = price;
+        this.duration = duration;
     }
 
-    public ProductEntity(int id, String fileName, String filePath, String fileType, long fileSize, String title, BigDecimal price) {
+    @Contract(pure = true)
+    public DietEntity(int id, String fileName, String filePath, String fileType, long fileSize, String title, BigDecimal duration) {
         this.id = id;
         this.fileName = fileName;
         this.filePath = filePath;
         this.fileType = fileType;
         this.fileSize = fileSize;
         this.title = title;
-        this.price = price;
+        this.duration = duration;
     }
 
     @Contract(value = "_ -> new", pure = true)
-    public static @NotNull ProductDTOO convertToProductDTOO(@NotNull ProductEntity productEntity) {
-        return new ProductDTOO(productEntity.id, productEntity.fileName, productEntity.title, productEntity.price);
+    public static @NotNull ProductDTOO convertToProductDTOO(@NotNull DietEntity dietEntity) {
+        return new ProductDTOO(dietEntity.id, dietEntity.fileName, dietEntity.title, dietEntity.duration);
     }
 
     public int getId() {
@@ -107,11 +105,11 @@ public class ProductEntity {
         this.title = title;
     }
 
-    public BigDecimal getPrice() {
-        return price;
+    public BigDecimal getDuration() {
+        return duration;
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+    public void setDuration(BigDecimal duration) {
+        this.duration = duration;
     }
 }

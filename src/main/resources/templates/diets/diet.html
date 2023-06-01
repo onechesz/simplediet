@@ -1,0 +1,31 @@
+<html layout:decorate="~{layouts/layout}" xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title th:text="${product.title}">Информация о диете</title>
+		<link href="../../static/css/product.css" media="all" rel="stylesheet" th:href="@{/css/product.css}"
+		      type="text/css">
+	</head>
+
+	<body>
+		<div layout:fragment="content">
+			<h1>Информация о диете</h1>
+
+			<div class="product">
+				<img th:src="@{'/images/' + ${product.fileName}}" width="512px">
+
+				<p th:text="${product.title}">Диета</p>
+				<p th:text="${product.price} + ' дн.'">Продолжительность</p>
+
+				<div sec:authorize="isAuthenticated()">
+					<form sec:authorize="hasRole('ADMIN')" th:action="@{/diets/{id}/edit(id=${product.id})}" th:method="GET">
+						<input type="submit" value="Редактировать диету (admin)">
+					</form>
+
+					<form sec:authorize="hasRole('ADMIN')" th:action="@{/diets/{id}(id=${product.id})}" th:method="DELETE">
+						<input type="submit" value="Удалить диету (admin)">
+					</form>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

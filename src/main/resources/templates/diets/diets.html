@@ -1,0 +1,70 @@
+<html layout:decorate="~{layouts/layout}" xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Диеты</title>
+		<link href="../../static/css/products.css" media="all" rel="stylesheet" th:href="@{/css/products.css}" type="text/css">
+	</head>
+
+	<body>
+		<div layout:fragment="sidebar">
+			<h3>Поиск</h3>
+
+			<form id="search_form" th:action="@{/diets}" th:method="GET">
+				<input id="search" name="search" placeholder="Название диеты..." type="text">
+				<input id="from" name="from" placeholder="От (дн.)" type="text">
+				<input id="to" name="to" placeholder="До (дн.)" type="text">
+
+				<label for="sort">сортировать по:</label>
+				<select id="sort" name="sort">
+					<option></option>
+					<option value="title">названию</option>
+					<option value="duration">продолжительности</option>
+				</select>
+
+				<input type="submit" value="применить">
+			</form>
+
+			<form id="add_product_admin" sec:authorize="hasRole('ADMIN')" th:action="@{/diets/add}" th:method="GET">
+				<input type="submit" value="Добавить диету (admin)">
+			</form>
+		</div>
+
+		<div layout:fragment="content">
+			<h1>Диеты</h1>
+
+			<div class="products">
+				<div th:each="product : ${products}">
+					<img th:src="@{'/images/' + ${product.fileName}}" width="256px">
+					<p><a th:href="@{/diets/{id}(id=${product.id})}" th:text="${product.title}">Диета</a></p>
+					<p th:text="${product.price} + ' дн.'">Продолжительность</p>
+				</div>
+			</div>
+		</div>
+
+		<script layout:fragment="script">
+					var myForm = document.getElementById('search_form');
+
+					myForm.addEventListener('submit', function (e) {
+						var allInputs = myForm.getElementsByTagName('input');
+						var allSelects = myForm.getElementsByTagName('select');
+
+						for (var i = 0; i < allInputs.length; i++) {
+							var input = allInputs[i];
+
+							if (input.name && !input.value) {
+								input.removeAttribute('name');
+							}
+						}
+
+						for (var i = 0; i < allSelects.length; i++) {
+							var select = allSelects[i];
+
+							if (select.name && !select.value) {
+								select.removeAttribute('name');
+							}
+						}
+					});
+
+
+		</script>
+	</body>
+</html>

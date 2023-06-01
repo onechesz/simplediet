@@ -1,6 +1,6 @@
 package com.github.onechesz.simplediet.dto.dtio;
 
-import com.github.onechesz.simplediet.entities.ProductEntity;
+import com.github.onechesz.simplediet.entities.DietEntity;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import org.jetbrains.annotations.NotNull;
@@ -27,10 +27,10 @@ public class ProductDTIO {
         this.price = price;
     }
 
-    public static @NotNull ProductEntity convertToProductEntity(@NotNull ProductDTIO productDTIO) {
+    public static @NotNull DietEntity convertToProductEntity(@NotNull ProductDTIO productDTIO) {
         String originalFileName = productDTIO.multipartFile.getOriginalFilename();
 
-        return new ProductEntity(
+        return new DietEntity(
                 originalFileName,
                 Paths.get(PRODUCTS_IMAGES_PATH, originalFileName).toString(),
                 productDTIO.multipartFile.getContentType(),
@@ -40,10 +40,10 @@ public class ProductDTIO {
         );
     }
 
-    public static @NotNull ProductEntity convertToProductEntity(@NotNull ProductDTIO productDTIO, int id) {
+    public static @NotNull DietEntity convertToProductEntity(@NotNull ProductDTIO productDTIO, int id) {
         String originalFileName = productDTIO.multipartFile.getOriginalFilename();
 
-        return new ProductEntity(
+        return new DietEntity(
                 id,
                 originalFileName,
                 Paths.get(PRODUCTS_IMAGES_PATH, originalFileName).toString(),

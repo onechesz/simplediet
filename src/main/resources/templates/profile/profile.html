@@ -2,43 +2,39 @@
 
 <html layout:decorate="~{layouts/layout}" xmlns:layout="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<head>
-	<title>Профиль</title>
-	<link href="../../static/css/profile.css" media="all" rel="stylesheet" th:href="@{/css/profile.css}" type="text/css">
-</head>
+    <head>
+    	<title>Профиль</title>
+    	<link href="../../static/css/profile.css" media="all" rel="stylesheet" th:href="@{/css/profile.css}" type="text/css">
+    </head>
 
-<body>
-<div layout:fragment="sidebar">
+    <body>
+        <div layout:fragment="content">
+        	<h1>Профиль</h1>
 
-</div>
+        	<h2>Ваши параметры:</h2>
 
-<div layout:fragment="content">
-	<h1>Профиль</h1>
+            <form th:action="@{/profile}" th:method="POST" th:object="${user_parameters}">
+                <label for="sex">Пол:</label>
+                <select id="sex" name="sex">
+                    <option th:value="male" th:text="мужской" th:selected="${'male' == user_parameters.sex}"></option>
+                    <option th:value="female" th:text="женский" th:selected="${'female' == user_parameters.sex}"></option>
+                </select>
+        		<span style="color: red" th:errors="*{sex}" th:if="@{#fields.hasErrors('sex')}">Ошибки в поле.</span>
 
-	<h2>Ваши параметры:</h2>
+                <label for="age">Возраст:</label>
+                <input type="text" name="age" id="age" th:field="*{age}">
+        		<span style="color: red" th:errors="*{age}" th:if="@{#fields.hasErrors('age')}">Ошибки в возрасте.</span>
 
-    <form th:action="@{/profile}" th:method="POST" th:object="${user_params}">
-        <label for="sex">Пол:</label>
-        <select name="sex" id="sex">
-            <option th:value="male" th:text="мужской" th:selected="${'male' == user_params.sex}"></option>
-            <option th:value="female" th:text="женский" th:selected="${'female' == user_params.sex}"></option>
-        </select>
-		<span style="color: red" th:errors="*{sex}" th:if="@{#fields.hasErrors('sex')}">Ошибки в поле.</span>
+                <label for="height">Рост:</label>
+                <input type="text" name="height" id="height" th:field="*{height}">
+        		<span style="color: red" th:errors="*{height}" th:if="@{#fields.hasErrors('height')}">Ошибки в росте.</span>
 
-        <label for="age">Возраст:</label>
-        <input type="text" name="age" id="age" th:field="*{age}">
-		<span style="color: red" th:errors="*{age}" th:if="@{#fields.hasErrors('age')}">Ошибки в возрасте.</span>
+                <label for="weight">Вес:</label>
+                <input type="text" name="weight" id="weight" th:field="*{weight}">
+        		<span style="color: red" th:errors="*{weight}" th:if="@{#fields.hasErrors('weight')}">Ошибки в весе.</span>
 
-        <label for="height">Рост:</label>
-        <input type="text" name="height" id="height" th:field="*{height}">
-		<span style="color: red" th:errors="*{height}" th:if="@{#fields.hasErrors('height')}">Ошибки в росте.</span>
-
-        <label for="weight">Вес:</label>
-        <input type="text" name="weight" id="weight" th:field="*{weight}">
-		<span style="color: red" th:errors="*{weight}" th:if="@{#fields.hasErrors('weight')}">Ошибки в весе.</span>
-
-        <input type="submit" value="Сохранить">
-    </form>
-</div>
-</body>
+                <input type="submit" value="Сохранить">
+            </form>
+        </div>
+    </body>
 </html>

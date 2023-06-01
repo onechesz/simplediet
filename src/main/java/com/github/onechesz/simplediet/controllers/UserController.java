@@ -2,6 +2,7 @@ package com.github.onechesz.simplediet.controllers;
 
 import com.github.onechesz.simplediet.entities.UserEntity;
 import com.github.onechesz.simplediet.services.UserService;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +15,7 @@ import java.util.Optional;
 public class UserController {
     private final UserService userService;
 
+    @Contract(pure = true)
     public UserController(UserService userService) {
         this.userService = userService;
     }
