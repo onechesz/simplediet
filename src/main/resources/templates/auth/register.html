@@ -1,36 +1,31 @@
 <!DOCTYPE html>
 
-<html layout:decorate="~{layouts/layout}" xmlns:layout="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
-<head>
-	<title>Регистрация</title>
-	<link href="../../static/css/auth.css" media="all" rel="stylesheet" th:href="@{/css/auth.css}" type="text/css">
-</head>
+<html layout:decorate="~{layouts/layout}" xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Регистрация</title>
+		<link href="../../static/css/auth.css" media="all" rel="stylesheet" th:href="@{/css/auth.css}" type="text/css">
+	</head>
 
-<body>
-<div layout:fragment="sidebar">
+	<body>
+		<div layout:fragment="content">
+			<h1>Регистрация</h1>
 
-</div>
+			<form class="auth" name="registration_form" th:action="@{/register}" th:method="POST" th:object="${user}">
+				<label for="username">Имя пользователя:</label>
+				<input id="username" name="username" th:field="*{username}" type="text">
+				<span style="color: red" th:errors="*{username}" th:if="@{#fields.hasErrors('username')}">Ошибки в имени пользователя.</span>
 
-<div layout:fragment="content">
-	<h1>Регистрация</h1>
+				<label for="user_password">Пароль:</label>
+				<input id="user_password" name="user_password" th:field="*{userPassword}" type="password">
+				<span style="color: red" th:errors="*{userPassword}"
+				      th:if="@{#fields.hasErrors('userPassword')}">Ошибки в пароле.</span>
 
-	<form class="auth" name="registration_form" th:action="@{/auth/register}" th:method="POST" th:object="${user}">
-		<label for="username">Имя пользователя:</label>
-		<input id="username" name="username" th:field="*{username}" type="text">
-		<span style="color: red" th:errors="*{username}" th:if="@{#fields.hasErrors('username')}">Ошибки в имени пользователя.</span>
+				<label for="confirmed_password">Подтверждения пароля:</label>
+				<input id="confirmed_password" name="confirmed_password" th:field="*{confirmedPassword}" type="password">
+				<span style="color: red" th:errors="*{confirmedPassword}" th:if="@{#fields.hasErrors('confirmedPassword')}">Ошибки в подтверждении пароля.</span>
 
-		<label for="user_password">Пароль:</label>
-		<input id="user_password" name="user_password" th:field="*{userPassword}" type="password">
-		<span style="color: red" th:errors="*{userPassword}"
-		      th:if="@{#fields.hasErrors('userPassword')}">Ошибки в пароле.</span>
-
-		<label for="confirmed_password">Подтверждения пароля:</label>
-		<input id="confirmed_password" name="confirmed_password" th:field="*{confirmedPassword}" type="password">
-		<span style="color: red" th:errors="*{confirmedPassword}" th:if="@{#fields.hasErrors('confirmedPassword')}">Ошибки в подтверждении пароля.</span>
-
-		<input type="submit" value="Зарегистрироваться">
-	</form>
-</div>
-</body>
+				<input type="submit" value="Зарегистрироваться">
+			</form>
+		</div>
+	</body>
 </html>

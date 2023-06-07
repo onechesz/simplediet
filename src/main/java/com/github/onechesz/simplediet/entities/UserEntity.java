@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Size;
 import org.jetbrains.annotations.Contract;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "\"user\"")
@@ -26,9 +27,15 @@ public class UserEntity {
     private String confirmedPassword;
     @Column(name = "role", nullable = false)
     private String role;
-    @OneToOne(mappedBy = "userEntity", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "userEntity", fetch = FetchType.LAZY)
     @PrimaryKeyJoinColumn
     private UserParametersEntity userParametersEntity;
+    @OneToOne
+    @JoinColumn(name = "personal_diet_id", referencedColumnName = "id")
+    private PersonalDietEntity personalDietEntity;
+    @OneToMany
+    @JoinColumn(name = "user_id")
+    private Set<PersonalDietEntity> personalDietEntities;
 
     @Contract(pure = true)
     public UserEntity() {
@@ -44,6 +51,18 @@ public class UserEntity {
     public UserEntity(String username, String password) {
         this.username = username;
         this.password = password;
+    }
+
+    @Contract(pure = true)
+    public UserEntity(int id, String username, String password, String userPassword, String confirmedPassword, String role, UserParametersEntity userParametersEntity, Set<PersonalDietEntity> personalDietEntities) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.userPassword = userPassword;
+        this.confirmedPassword = confirmedPassword;
+        this.role = role;
+        this.userParametersEntity = userParametersEntity;
+        this.personalDietEntities = personalDietEntities;
     }
 
     public int getId() {
@@ -100,5 +119,13 @@ public class UserEntity {
 
     public void setUserParametersEntity(UserParametersEntity userParametersEntity) {
         this.userParametersEntity = userParametersEntity;
+    }
+
+    public Set<PersonalDietEntity> getPersonalDietEntities() {
+        return personalDietEntities;
+    }
+
+    public void setPersonalDietEntities(Set<PersonalDietEntity> personalDietEntities) {
+        this.personalDietEntities = personalDietEntities;
     }
 }

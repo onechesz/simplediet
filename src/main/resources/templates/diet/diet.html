@@ -1,0 +1,18 @@
+<html layout:decorate="~{layouts/layout}" xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Моя диета</title>
+		<link href="../../static/css/product.css" media="all" rel="stylesheet" th:href="@{/css/product.css}"
+		      type="text/css">
+	</head>
+
+	<body>
+		<div layout:fragment="content">
+			<h1>Моя диета</h1>
+
+			<div th:if="${personal_diet}">
+				<p th:text=${personal_diet.start_time}></p>
+				<p th:text=${personal_diet.duration}></p>
+			</div>
+		</div>
+	</body>
+</html>

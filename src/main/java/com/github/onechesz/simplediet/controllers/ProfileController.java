@@ -39,7 +39,7 @@ public class ProfileController {
             return "profile/profile";
         }
 
-        return "redirect:/auth/login";
+        return "redirect:/login";
     }
 
     @PostMapping(value = "")
@@ -56,6 +56,6 @@ public class ProfileController {
             return "profile/profile";
         }
 
-        return "redirect:/auth/login";
+        return "redirect:/login";
     }
 }

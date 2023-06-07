@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping(value = "/auth")
+@RequestMapping(value = "")
 public class AuthController {
     private final UserFieldsValidator userFieldsValidator;
     private final UserDataValidator userDataValidator;
@@ -48,7 +48,7 @@ public class AuthController {
 
         userService.save(userEntity);
 
-        return "redirect:/auth/login";
+        return "redirect:/login";
     }
 
     @GetMapping(value = "/login")
