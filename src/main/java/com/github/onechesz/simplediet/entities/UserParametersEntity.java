@@ -1,9 +1,11 @@
 package com.github.onechesz.simplediet.entities;
 
+import com.github.onechesz.simplediet.dto.UserParametersDTO;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
 import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 @Entity
 @Table(name = "user_parameters")
@@ -14,18 +16,16 @@ public class UserParametersEntity {
     @Column(name = "sex", nullable = false)
     private String sex;
     @Column(name = "age", nullable = false)
-    @Min(value = 6, message = "Минимальный возраст для получения диеты - 6 лет.")
-    @Max(value = 120, message = "Введите корректный возраст.")
     private int age;
     @Column(name = "height", nullable = false)
-    @Min(value = 100, message = "Минимальный рост для получения диеты - 100см.")
-    @Max(value = 250, message = "Введите корректный рост.")
     private int height;
     @Column(name = "weight", nullable = false)
-    @Min(value = 20, message = "Минимальный вес для получения диеты - 20кг.")
-    @Max(value = 250, message = "Введите корректный вес.")
     private int weight;
-    @OneToOne
+    @Column(name = "allergy")
+    private String allergy;
+    @Column(name = "physical_activity")
+    private String physicalActivity;
+    @OneToOne(cascade = CascadeType.ALL)
     @MapsId
     @JoinColumn(name = "user_id")
     private UserEntity userEntity;
@@ -36,11 +36,18 @@ public class UserParametersEntity {
     }
 
     @Contract(pure = true)
-    public UserParametersEntity(String sex, int age, int height, int weight) {
+    public UserParametersEntity(String sex, int age, int height, int weight, String allergy, String physicalActivity) {
         this.sex = sex;
         this.age = age;
         this.height = height;
         this.weight = weight;
+        this.allergy = allergy;
+        this.physicalActivity = physicalActivity;
+    }
+
+    @Contract("_ -> new")
+    public static @NotNull UserParametersDTO convertToUserParametersDTO(@NotNull UserParametersEntity userParametersEntity) {
+        return new UserParametersDTO(userParametersEntity.sex, userParametersEntity.age, userParametersEntity.height, userParametersEntity.weight, List.of(userParametersEntity.allergy.split(", ")), userParametersEntity.physicalActivity);
     }
 
     public int getUserId() {
@@ -81,6 +88,22 @@ public class UserParametersEntity {
 
     public void setWeight(int weight) {
         this.weight = weight;
+    }
+
+    public String getAllergy() {
+        return allergy;
+    }
+
+    public void setAllergy(String allergy) {
+        this.allergy = allergy;
+    }
+
+    public String getPhysicalActivity() {
+        return physicalActivity;
+    }
+
+    public void setPhysicalActivity(String physicalActivity) {
+        this.physicalActivity = physicalActivity;
     }
 
     public UserEntity getUserEntity() {

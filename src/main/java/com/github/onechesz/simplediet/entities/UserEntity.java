@@ -26,7 +26,7 @@ public class UserEntity {
     private String confirmedPassword;
     @Column(name = "role", nullable = false)
     private String role;
-    @OneToOne(mappedBy = "userEntity", fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "userEntity", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private UserParametersEntity userParametersEntity;
     @OneToOne

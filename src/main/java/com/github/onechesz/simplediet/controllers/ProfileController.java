@@ -1,6 +1,6 @@
 package com.github.onechesz.simplediet.controllers;
 
-import com.github.onechesz.simplediet.entities.UserParametersEntity;
+import com.github.onechesz.simplediet.dto.UserParametersDTO;
 import com.github.onechesz.simplediet.security.UserDetails;
 import com.github.onechesz.simplediet.services.UserParametersService;
 import jakarta.validation.Valid;
@@ -43,7 +43,7 @@ public class ProfileController {
     }
 
     @PostMapping(value = "")
-    private @NotNull String profile(@ModelAttribute(value = "user_parameters") @Valid UserParametersEntity userParametersEntity, @NotNull BindingResult bindingResult) {
+    private @NotNull String profile(@ModelAttribute(value = "user_parameters") @Valid UserParametersDTO userParametersDTO, @NotNull BindingResult bindingResult) {
         if (bindingResult.hasErrors()) return "profile/profile";
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -51,7 +51,7 @@ public class ProfileController {
         if (authentication.isAuthenticated() && !(authentication instanceof AnonymousAuthenticationToken)) {
             int userId = ((UserDetails) authentication.getPrincipal()).getId();
 
-            userParametersService.save(userId, userParametersEntity);
+            userParametersService.save(userId, userParametersDTO);
 
             return "profile/profile";
         }

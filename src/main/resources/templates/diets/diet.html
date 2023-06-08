@@ -1,11 +1,38 @@
 <html layout:decorate="~{layouts/layout}" xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<title th:text="${diet.title}">Информация о диете</title>
-		<link href="../../static/css/diet.css" media="all" rel="stylesheet" th:href="@{/css/diet.css}"
-		      type="text/css">
+		<link href="../../static/css/diet.css" media="all" rel="stylesheet" th:href="@{/css/diet.css}" type="text/css">
+		<link href="../../static/css/diets.css" media="all" rel="stylesheet" th:href="@{/css/diets.css}" type="text/css">
 	</head>
 
 	<body>
+		<div layout:fragment="sidebar">
+			<div sec:authorize="isAnonymous()">
+				<h3><a th:href="@{/login}">Войдите</a>, чтобы сгенерировать персональную диету на основе этой.</h3>
+			</div>
+
+			<div sec:authorize="isAuthenticated()">
+				<h3>Использовать эту диету</h3>
+
+				<form id="search_form" th:action="@{/diets/start}" th:method="POST">
+					<input id="preferences" name="preferences" placeholder="Предпочтения" type="text">
+
+					<label for="goal">цель:</label>
+					<select id="goal" name="goal">
+						<option value="gain">Набор массы тела</option>
+						<option value="keep">Сохранение веса</option>
+						<option value="lose">Похудение</option>
+					</select>
+
+					<input type="hidden" id="diet_title" name="diet_title" value="${diet.title}">
+
+					<input type="hidden" id="diet_duration" name="diet_duration" value="${diet.duration}">
+
+					<input type="submit" value="сгенерировать план">
+				</form>
+			</div>
+		</div>
+
 		<div layout:fragment="content">
 			<h1>Информация о диете</h1>
 

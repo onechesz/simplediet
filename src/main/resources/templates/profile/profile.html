@@ -32,6 +32,34 @@
                 <input type="text" name="weight" id="weight" th:field="*{weight}">
         		<span style="color: red" th:errors="*{weight}" th:if="@{#fields.hasErrors('weight')}">Ошибки в весе.</span>
 
+                <label>Аллергия:</label>
+                <label for="морепродукты">морепродукты</label>
+                <input type="checkbox" name="allergy" value="морепродукты" th:checked="${user_parameters.allergy.contains('морепродукты')}">
+                <label for="молоко">молоко</label>
+                <input type="checkbox" name="allergy" value="молоко" th:checked="${user_parameters.allergy.contains('молоко')}">
+                <label for="белок">белок</label>
+                <input type="checkbox" name="allergy" value="белок" th:checked="${user_parameters.allergy.contains('белок')}">
+                <label for="глютен">глютен</label>
+                <input type="checkbox" name="allergy" value="глютен" th:checked="${user_parameters.allergy.contains('глютен')}">
+                <label for="соя">соя</label>
+                <input type="checkbox" name="allergy" value="соя" th:checked="${user_parameters.allergy.contains('соя')}">
+                <label for="мёд">мёд</label>
+                <input type="checkbox" name="allergy" value="мёд" th:checked="${user_parameters.allergy.contains('мёд')}">
+                <label for="орехи">орехи</label>
+                <input type="checkbox" name="allergy" value="орехи" th:checked="${user_parameters.allergy.contains('орехи')}">
+                <label for="фрукты и овощи">фрукты и овощи</label>
+                <input type="checkbox" name="allergy" value="фрукты и овощи" th:checked="${user_parameters.allergy.contains('фрукты и овощи')}">
+                <label for="шоколад">шоколад</label>
+                <input type="checkbox" name="allergy" value="шоколад" th:checked="${user_parameters.allergy.contains('шоколад')}">
+
+                <label for="physical_activity">Физическая активность:</label>
+                <select id="physical_activity" name="physicalActivity">
+                    <option th:value="high" th:text="высокая" th:selected="${'high' == user_parameters.physicalActivity}"></option>
+                    <option th:value="medium" th:text="средняя" th:selected="${'medium' == user_parameters.physicalActivity}"></option>
+                    <option th:value="low" th:text="низкая" th:selected="${'low' == user_parameters.physicalActivity}"></option>
+                </select>
+                <span style="color: red" th:errors="*{physicalActivity}" th:if="@{#fields.hasErrors('physicalActivity')}">Ошибки в физической активности.</span>
+
                 <input type="submit" value="Сохранить">
             </form>
         </div>
