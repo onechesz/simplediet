@@ -1,22 +1,26 @@
 package com.github.onechesz.simplediet.dto.dtoo;
 
-import java.math.BigDecimal;
+import org.jetbrains.annotations.Contract;
 
-public class ProductDTOO {
+public class DietDTOO {
     private int id;
     private String fileName;
     private String title;
-    private BigDecimal price;
+    private String description;
+    private int duration;
 
-    public ProductDTOO() {
+    @Contract(pure = true)
+    public DietDTOO() {
 
     }
 
-    public ProductDTOO(int id, String fileName, String title, BigDecimal price) {
+    @Contract(pure = true)
+    public DietDTOO(int id, String fileName, String title, String description, int duration) {
         this.id = id;
         this.fileName = fileName;
         this.title = title;
-        this.price = price;
+        this.description = description;
+        this.duration = duration;
     }
 
     public int getId() {
@@ -43,11 +47,15 @@ public class ProductDTOO {
         this.title = title;
     }
 
-    public BigDecimal getPrice() {
-        return price;
+    public String getDescription() {
+        return description;
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
     }
 }

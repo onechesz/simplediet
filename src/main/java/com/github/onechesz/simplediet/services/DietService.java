@@ -1,7 +1,7 @@
 package com.github.onechesz.simplediet.services;
 
-import com.github.onechesz.simplediet.dto.dtio.ProductDTIO;
-import com.github.onechesz.simplediet.dto.dtoo.ProductDTOO;
+import com.github.onechesz.simplediet.dto.dtio.DietDTIO;
+import com.github.onechesz.simplediet.dto.dtoo.DietDTOO;
 import com.github.onechesz.simplediet.entities.DietEntity;
 import com.github.onechesz.simplediet.repositories.DietRepository;
 import org.jetbrains.annotations.Contract;
@@ -27,44 +27,44 @@ public class DietService {
         this.dietRepository = dietRepository;
     }
 
-    public List<ProductDTOO> findAll(String search, String from, String to, String sort) {
-        List<ProductDTOO> productDTOOS = new ArrayList<>();
+    public List<DietDTOO> findAll(String search, String from, String to, String sort) {
+        List<DietDTOO> dietDTOOS = new ArrayList<>();
 
         if (search != null) {
             if (from != null) {
                 if (to != null) {
                     if (sort != null) {
                         for (DietEntity dietEntity : dietRepository.findByTitleContainsWhereDurationFromTo(search, from, to, Sort.by(Sort.DEFAULT_DIRECTION, sort)))
-                            productDTOOS.add(DietEntity.convertToProductDTOO(dietEntity));
+                            dietDTOOS.add(DietEntity.convertToDietDTOO(dietEntity));
                     } else {
                         for (DietEntity dietEntity : dietRepository.findByTitleContainsWhereDurationFromTo(search, from, to))
-                            productDTOOS.add(DietEntity.convertToProductDTOO(dietEntity));
+                            dietDTOOS.add(DietEntity.convertToDietDTOO(dietEntity));
                     }
                 } else {
                     if (sort != null) {
                         for (DietEntity dietEntity : dietRepository.findByTitleContainsWhereDurationFrom(search, from, Sort.by(Sort.DEFAULT_DIRECTION, sort)))
-                            productDTOOS.add(DietEntity.convertToProductDTOO(dietEntity));
+                            dietDTOOS.add(DietEntity.convertToDietDTOO(dietEntity));
                     } else {
                         for (DietEntity dietEntity : dietRepository.findByTitleContainsWhereDurationFrom(search, from))
-                            productDTOOS.add(DietEntity.convertToProductDTOO(dietEntity));
+                            dietDTOOS.add(DietEntity.convertToDietDTOO(dietEntity));
                     }
                 }
             } else {
                 if (to != null) {
                     if (sort != null) {
                         for (DietEntity dietEntity : dietRepository.findByTitleContainsWhereDurationTo(search, to, Sort.by(Sort.DEFAULT_DIRECTION, sort)))
-                            productDTOOS.add(DietEntity.convertToProductDTOO(dietEntity));
+                            dietDTOOS.add(DietEntity.convertToDietDTOO(dietEntity));
                     } else {
                         for (DietEntity dietEntity : dietRepository.findByTitleContainsWhereDurationTo(search, to))
-                            productDTOOS.add(DietEntity.convertToProductDTOO(dietEntity));
+                            dietDTOOS.add(DietEntity.convertToDietDTOO(dietEntity));
                     }
                 } else {
                     if (sort != null) {
                         for (DietEntity dietEntity : dietRepository.findByTitleContains(search, Sort.by(Sort.DEFAULT_DIRECTION, sort)))
-                            productDTOOS.add(DietEntity.convertToProductDTOO(dietEntity));
+                            dietDTOOS.add(DietEntity.convertToDietDTOO(dietEntity));
                     } else {
                         for (DietEntity dietEntity : dietRepository.findByTitleContains(search))
-                            productDTOOS.add(DietEntity.convertToProductDTOO(dietEntity));
+                            dietDTOOS.add(DietEntity.convertToDietDTOO(dietEntity));
                     }
                 }
             }
@@ -73,75 +73,75 @@ public class DietService {
                 if (to != null) {
                     if (sort != null) {
                         for (DietEntity dietEntity : dietRepository.findByDurationBetween(from, to, Sort.by(Sort.DEFAULT_DIRECTION, sort)))
-                            productDTOOS.add(DietEntity.convertToProductDTOO(dietEntity));
+                            dietDTOOS.add(DietEntity.convertToDietDTOO(dietEntity));
                     } else {
                         for (DietEntity dietEntity : dietRepository.findByDurationBetween(from, to))
-                            productDTOOS.add(DietEntity.convertToProductDTOO(dietEntity));
+                            dietDTOOS.add(DietEntity.convertToDietDTOO(dietEntity));
                     }
                 } else {
                     if (sort != null) {
                         for (DietEntity dietEntity : dietRepository.findByDurationGreaterThan(from, Sort.by(Sort.DEFAULT_DIRECTION, sort)))
-                            productDTOOS.add(DietEntity.convertToProductDTOO(dietEntity));
+                            dietDTOOS.add(DietEntity.convertToDietDTOO(dietEntity));
                     } else {
                         for (DietEntity dietEntity : dietRepository.findByDurationGreaterThan(from))
-                            productDTOOS.add(DietEntity.convertToProductDTOO(dietEntity));
+                            dietDTOOS.add(DietEntity.convertToDietDTOO(dietEntity));
                     }
                 }
             } else {
                 if (to != null) {
                     if (sort != null) {
                         for (DietEntity dietEntity : dietRepository.findByDurationLessThan(to, Sort.by(Sort.DEFAULT_DIRECTION, sort)))
-                            productDTOOS.add(DietEntity.convertToProductDTOO(dietEntity));
+                            dietDTOOS.add(DietEntity.convertToDietDTOO(dietEntity));
                     } else {
                         for (DietEntity dietEntity : dietRepository.findByDurationLessThan(to))
-                            productDTOOS.add(DietEntity.convertToProductDTOO(dietEntity));
+                            dietDTOOS.add(DietEntity.convertToDietDTOO(dietEntity));
                     }
                 } else {
                     if (sort != null) {
                         for (DietEntity dietEntity : dietRepository.findAll(Sort.by(Sort.DEFAULT_DIRECTION, sort)))
-                            productDTOOS.add(DietEntity.convertToProductDTOO(dietEntity));
+                            dietDTOOS.add(DietEntity.convertToDietDTOO(dietEntity));
                     } else {
                         for (DietEntity dietEntity : dietRepository.findAll())
-                            productDTOOS.add(DietEntity.convertToProductDTOO(dietEntity));
+                            dietDTOOS.add(DietEntity.convertToDietDTOO(dietEntity));
                     }
                 }
             }
         }
 
-        return productDTOOS;
+        return dietDTOOS;
     }
 
     @Transactional
-    public void save(@NotNull ProductDTIO productDTIO) throws IOException {
-        MultipartFile multipartFile = productDTIO.getMultipartFile();
+    public void save(@NotNull DietDTIO dietDTIO) throws IOException {
+        MultipartFile multipartFile = dietDTIO.getMultipartFile();
 
-        multipartFile.transferTo(new File(ProductDTIO.PRODUCTS_IMAGES_PATH + multipartFile.getOriginalFilename()));
-        dietRepository.save(ProductDTIO.convertToProductEntity(productDTIO));
+        multipartFile.transferTo(new File(DietDTIO.UPLOADS_IMAGES_PATH + multipartFile.getOriginalFilename()));
+        dietRepository.save(DietDTIO.convertToDietEntity(dietDTIO));
     }
 
-    public ProductDTOO findById(int id) {
-        Optional<DietEntity> productEntityOptional = dietRepository.findById(id);
+    public DietDTOO findById(int id) {
+        Optional<DietEntity> dietEntityOptional = dietRepository.findById(id);
 
-        return productEntityOptional.map(DietEntity::convertToProductDTOO).orElse(null);
+        return dietEntityOptional.map(DietEntity::convertToDietDTOO).orElse(null);
 
     }
 
     @Transactional
-    public void edit(int id, @NotNull ProductDTIO productDTIO) throws IOException {
+    public void edit(int id, @NotNull DietDTIO dietDTIO) throws IOException {
         DietEntity dietEntity = dietRepository.findById(id).orElseThrow();
         File oldFile = new File(dietEntity.getFilePath());
-        MultipartFile multipartFile = productDTIO.getMultipartFile();
-        File newFile = new File(ProductDTIO.PRODUCTS_IMAGES_PATH + multipartFile.getOriginalFilename());
+        MultipartFile multipartFile = dietDTIO.getMultipartFile();
+        File newFile = new File(DietDTIO.UPLOADS_IMAGES_PATH + multipartFile.getOriginalFilename());
 
         if (!multipartFile.isEmpty()) {
             multipartFile.transferTo(newFile);
-            dietRepository.save(ProductDTIO.convertToProductEntity(productDTIO, id));
+            dietRepository.save(DietDTIO.convertToDietEntity(dietDTIO, id));
 
             if (!oldFile.getPath().equals(newFile.getPath()))
                 if (!oldFile.delete()) throw new IOException();
         } else {
-            dietEntity.setTitle(productDTIO.getTitle());
-            dietEntity.setDuration(productDTIO.getPrice());
+            dietEntity.setTitle(dietDTIO.getTitle());
+            dietEntity.setDuration(dietDTIO.getDuration());
             dietRepository.save(dietEntity);
         }
     }

@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import org.jetbrains.annotations.Contract;
 
-import java.util.List;
 import java.util.Set;
 
 @Entity

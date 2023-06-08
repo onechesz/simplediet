@@ -13,6 +13,7 @@
 			<li><a th:href="@{/diets}">Диеты</a></li>
 			<li sec:authorize="isAnonymous()"><a th:href="@{/login}">Вход</a></li>
 			<li	sec:authorize="isAuthenticated()"><a th:href="@{/profile}">Профиль</a></li>
+			<li	sec:authorize="isAuthenticated()"><a th:href="@{/diet}">Моя диета</a></li>
 			<li sec:authorize="isAuthenticated()">
 				<form th:action="@{/logout}" th:method="POST">
 					<button type="submit">Выход</button>

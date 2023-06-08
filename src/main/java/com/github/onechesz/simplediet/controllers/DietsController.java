@@ -1,7 +1,7 @@
 package com.github.onechesz.simplediet.controllers;
 
-import com.github.onechesz.simplediet.dto.dtio.ProductDTIO;
-import com.github.onechesz.simplediet.dto.dtoo.ProductDTOO;
+import com.github.onechesz.simplediet.dto.dtio.DietDTIO;
+import com.github.onechesz.simplediet.dto.dtoo.DietDTOO;
 import com.github.onechesz.simplediet.services.DietService;
 import jakarta.validation.Valid;
 import org.jetbrains.annotations.Contract;
@@ -25,62 +25,62 @@ public class DietsController {
     }
 
     @GetMapping(value = "")
-    public String products(@RequestParam(value = "search", required = false) String search, @RequestParam(value = "from", required = false) String from, @RequestParam(value = "to", required = false) String to, @RequestParam(value = "sort", required = false) String sort, @NotNull Model model) {
-        model.addAttribute("products", dietService.findAll(search, from, to, sort));
+    public String diets(@RequestParam(value = "search", required = false) String search, @RequestParam(value = "from", required = false) String from, @RequestParam(value = "to", required = false) String to, @RequestParam(value = "sort", required = false) String sort, @NotNull Model model) {
+        model.addAttribute("diets", dietService.findAll(search, from, to, sort));
 
         return "diets/diets";
     }
 
     @GetMapping(value = "/add")
-    public String addProduct(@NotNull Model model) {
-        model.addAttribute("product", new ProductDTIO());
+    public String addDiet(@NotNull Model model) {
+        model.addAttribute("diet", new DietDTIO());
 
         return "diets/add";
     }
 
     @PostMapping(value = "/add")
-    public String addProduct(@ModelAttribute(value = "product") @Valid ProductDTIO productDTIO, @NotNull BindingResult bindingResult) throws IOException {
-        if (bindingResult.hasErrors()) return "products/add";
+    public String addDiet(@ModelAttribute(value = "diet") @Valid DietDTIO dietDTIO, @NotNull BindingResult bindingResult) throws IOException {
+        if (bindingResult.hasErrors()) return "diets/add";
 
-        dietService.save(productDTIO);
+        dietService.save(dietDTIO);
 
         return "redirect:/diets";
     }
 
-    @GetMapping(value = "/{id}")
-    public String viewProduct(@PathVariable("id") int productId, @NotNull Model model) {
-        ProductDTOO productDTOO = dietService.findById(productId);
+    @GetMapping(value = "/{dietId}")
+    public String viewDiet(@PathVariable("dietId") int dietId, @NotNull Model model) {
+        DietDTOO dietDTOO = dietService.findById(dietId);
 
-        if (productDTOO == null) return "redirect:/diets";
+        if (dietDTOO == null) return "redirect:/diets";
 
-        model.addAttribute("product", productDTOO);
+        model.addAttribute("diet", dietDTOO);
 
         return "diets/diet";
     }
 
-    @GetMapping(value = "/{id}/edit")
-    public String editProduct(@PathVariable("id") int id, @NotNull Model model) {
-        ProductDTOO productDTOO = dietService.findById(id);
+    @GetMapping(value = "/{dietId}/edit")
+    public String editDiet(@PathVariable("dietId") int dietId, @NotNull Model model) {
+        DietDTOO dietDTOO = dietService.findById(dietId);
 
-        if (productDTOO == null) return "redirect:/diets";
+        if (dietDTOO == null) return "redirect:/diets";
 
-        model.addAllAttributes(Map.of("product_dtoo", productDTOO, "product_dtio", new ProductDTIO()));
+        model.addAllAttributes(Map.of("diet_dtoo", dietDTOO, "diet_dtio", new DietDTIO()));
 
         return "diets/edit";
     }
 
-    @PatchMapping(value = "/{id}/edit")
-    public String editProduct(@PathVariable("id") int id, @ModelAttribute("product") @Valid ProductDTIO productDTIO, @NotNull BindingResult bindingResult) throws IOException {
+    @PatchMapping(value = "/{dietId}/edit")
+    public String editDiet(@PathVariable("dietId") int dietId, @ModelAttribute("diet") @Valid DietDTIO dietDTIO, @NotNull BindingResult bindingResult) throws IOException {
         if (bindingResult.hasErrors()) return "diets/edit";
 
-        dietService.edit(id, productDTIO);
+        dietService.edit(dietId, dietDTIO);
 
         return "redirect:/diets";
     }
 
-    @DeleteMapping(value = "/{id}")
-    public String deleteProduct(@PathVariable("id") int id) throws IOException {
-        dietService.deleteById(id);
+    @DeleteMapping(value = "/{dietId}")
+    public String deleteDiet(@PathVariable("dietId") int dietId) throws IOException {
+        dietService.deleteById(dietId);
 
         return "redirect:/diets";
     }

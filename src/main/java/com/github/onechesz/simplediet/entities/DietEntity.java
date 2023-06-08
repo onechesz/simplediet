@@ -1,11 +1,9 @@
 package com.github.onechesz.simplediet.entities;
 
-import com.github.onechesz.simplediet.dto.dtoo.ProductDTOO;
+import com.github.onechesz.simplediet.dto.dtoo.DietDTOO;
 import jakarta.persistence.*;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
-
-import java.math.BigDecimal;
 
 @Entity
 @Table(name = "diet")
@@ -24,25 +22,28 @@ public class DietEntity {
     private long fileSize;
     @Column(name = "title", nullable = false)
     private String title;
+    @Column(name = "description", nullable = false)
+    private String description;
     @Column(name = "duration", nullable = false)
-    private BigDecimal duration;
+    private int duration;
 
     @Contract(pure = true)
     public DietEntity() {
     }
 
     @Contract(pure = true)
-    public DietEntity(String fileName, String filePath, String fileType, long fileSize, String title, BigDecimal duration) {
+    public DietEntity(String fileName, String filePath, String fileType, long fileSize, String title, String description, int duration) {
         this.fileName = fileName;
         this.filePath = filePath;
         this.fileType = fileType;
         this.fileSize = fileSize;
         this.title = title;
+        this.description = description;
         this.duration = duration;
     }
 
     @Contract(pure = true)
-    public DietEntity(int id, String fileName, String filePath, String fileType, long fileSize, String title, BigDecimal duration) {
+    public DietEntity(int id, String fileName, String filePath, String fileType, long fileSize, String title, String description, int duration) {
         this.id = id;
         this.fileName = fileName;
         this.filePath = filePath;
@@ -53,8 +54,8 @@ public class DietEntity {
     }
 
     @Contract(value = "_ -> new", pure = true)
-    public static @NotNull ProductDTOO convertToProductDTOO(@NotNull DietEntity dietEntity) {
-        return new ProductDTOO(dietEntity.id, dietEntity.fileName, dietEntity.title, dietEntity.duration);
+    public static @NotNull DietDTOO convertToDietDTOO(@NotNull DietEntity dietEntity) {
+        return new DietDTOO(dietEntity.id, dietEntity.fileName, dietEntity.title, dietEntity.description, dietEntity.duration);
     }
 
     public int getId() {
@@ -105,11 +106,19 @@ public class DietEntity {
         this.title = title;
     }
 
-    public BigDecimal getDuration() {
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getDuration() {
         return duration;
     }
 
-    public void setDuration(BigDecimal duration) {
+    public void setDuration(int duration) {
         this.duration = duration;
     }
 }

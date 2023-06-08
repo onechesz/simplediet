@@ -2,8 +2,8 @@ package com.github.onechesz.simplediet.controllers;
 
 import com.github.onechesz.simplediet.entities.UserEntity;
 import com.github.onechesz.simplediet.services.UserService;
-import com.github.onechesz.simplediet.validators.UserFieldsValidator;
 import com.github.onechesz.simplediet.validators.UserDataValidator;
+import com.github.onechesz.simplediet.validators.UserFieldsValidator;
 import jakarta.validation.Valid;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;

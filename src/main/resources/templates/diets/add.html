@@ -9,7 +9,7 @@
 		<div layout:fragment="content">
 			<h1>Добавить диету</h1>
 
-			<form enctype="multipart/form-data" name="product_add_form" th:action="@{/diets/add}" th:method="POST" th:object="${product}">
+			<form enctype="multipart/form-data" th:action="@{/diets/add}" th:method="POST" th:object="${diet}">
 				<label for="image">
 					<input accept="image/png, image/jpeg" id="image" name="image" style="display: none;"
 					       th:field="*{multipartFile}"
@@ -22,9 +22,13 @@
 				<span style="color: red" th:errors="*{title}"
 				      th:if="@{#fields.hasErrors('title')}">Ошибки в названии диеты.</span>
 
-				<label for="price">Продолжительность:</label>
-				<input id="price" name="price" th:field="*{price}" type="text">
-				<span style="color: red" th:errors="*{price}" th:if="@{#fields.hasErrors('price')}">Ошибки в продолжительности.</span>
+				<label for="description">Описание:</label>
+				<input id="description" name="description" th:field="*{description}" type="text">
+				<span style="color: red" th:errors="*{description}" th:if="@{#fields.hasErrors('description')}">Ошибки в описании.</span>
+
+				<label for="duration">Продолжительность:</label>
+				<input id="duration" name="duration" th:field="*{duration}" type="text">
+				<span style="color: red" th:errors="*{duration}" th:if="@{#fields.hasErrors('duration')}">Ошибки в продолжительности.</span>
 
 				<input type="submit" value="Добавить">
 			</form>

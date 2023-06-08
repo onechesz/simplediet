@@ -1,7 +1,6 @@
-<html layout:decorate="~{layouts/layout}" xmlns:layout="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html layout:decorate="~{layouts/layout}" xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 	<head>
-		<title th:text="${product_dtoo.title}">Редактировать диету</title>
+		<title th:text="${diet_dtoo.title}">Редактировать диету</title>
 		<link href="../../static/css/auth.css" media="all" rel="stylesheet" th:href="@{/css/auth.css}" type="text/css">
 	</head>
 
@@ -9,22 +8,23 @@
 		<div layout:fragment="content">
 			<h1>Редактировать диету</h1>
 
-			<form enctype="multipart/form-data" name="product_edit_form" th:action="@{/diets/{id}/edit(id=${product_dtoo.id})}" th:method="PATCH" th:object="${product_dtio}">
+			<form enctype="multipart/form-data" th:action="@{/diets/{id}/edit(id=${diet_dtoo.id})}" th:method="PATCH" th:object="${diet_dtio}">
 				<label for="image">
-					<input accept="image/png, image/jpeg" id="image" name="image" style="display: none;"
-					       th:field="*{multipartFile}"
-					       type="file">
-					<img th:src="@{'/images/' + ${product_dtoo.fileName}}" width="512px">
+					<input accept="image/png, image/jpeg" id="image" name="image" style="display: none;" th:field="*{multipartFile}" type="file">
+					<img th:src="@{'/images/' + ${diet_dtoo.fileName}}" width="512px">
 				</label>
 
 				<label for="title">Назавание диеты:</label>
-				<input id="title" name="title" th:value="${product_dtoo.title}" type="text">
-				<span style="color: red" th:errors="*{title}"
-				      th:if="@{#fields.hasErrors('title')}">Ошибки в названии диеты.</span>
+				<input id="title" name="title" th:value="${diet_dtoo.title}" type="text">
+				<span style="color: red" th:errors="*{title}" th:if="@{#fields.hasErrors('title')}">Ошибки в названии диеты.</span>
 
-				<label for="price">Продолжительность:</label>
-				<input id="price" name="price" th:value="${product_dtoo.price}" type="text">
-				<span style="color: red" th:errors="*{price}" th:if="@{#fields.hasErrors('price')}">Ошибки в продолжительности.</span>
+				<label for="description">Описание:</label>
+				<input id="description" name="description" th:field="*{description}" type="text">
+				<span style="color: red" th:errors="*{description}" th:if="@{#fields.hasErrors('description')}">Ошибки в описании.</span>
+
+				<label for="duration">Продолжительность:</label>
+				<input id="duration" name="duration" th:value="${diet_dtoo.duration}" type="text">
+				<span style="color: red" th:errors="*{duration}" th:if="@{#fields.hasErrors('duration')}">Ошибки в продолжительности.</span>
 
 				<input type="submit" value="Обновить">
 			</form>

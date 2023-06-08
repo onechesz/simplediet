@@ -1,7 +1,7 @@
 <html layout:decorate="~{layouts/layout}" xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<title>Диеты</title>
-		<link href="../../static/css/products.css" media="all" rel="stylesheet" th:href="@{/css/products.css}" type="text/css">
+		<link href="../../static/css/diets.css" media="all" rel="stylesheet" th:href="@{/css/diets.css}" type="text/css">
 	</head>
 
 	<body>
@@ -23,7 +23,7 @@
 				<input type="submit" value="применить">
 			</form>
 
-			<form id="add_product_admin" sec:authorize="hasRole('ADMIN')" th:action="@{/diets/add}" th:method="GET">
+			<form id="add_diet_admin" sec:authorize="hasRole('ADMIN')" th:action="@{/diets/add}" th:method="GET">
 				<input type="submit" value="Добавить диету (admin)">
 			</form>
 		</div>
@@ -31,11 +31,11 @@
 		<div layout:fragment="content">
 			<h1>Диеты</h1>
 
-			<div class="products">
-				<div th:each="product : ${products}">
-					<img th:src="@{'/images/' + ${product.fileName}}" width="256px">
-					<p><a th:href="@{/diets/{id}(id=${product.id})}" th:text="${product.title}">Диета</a></p>
-					<p th:text="${product.price} + ' дн.'">Продолжительность</p>
+			<div class="diets">
+				<div th:each="diet : ${diets}">
+					<img th:src="@{'/images/' + ${diet.fileName}}" width="256px">
+					<p><a th:href="@{/diets/{id}(id=${diet.id})}" th:text="${diet.title}">Диета</a></p>
+					<p th:text="${diet.duration} + ' дн.'">Продолжительность</p>
 				</div>
 			</div>
 		</div>
