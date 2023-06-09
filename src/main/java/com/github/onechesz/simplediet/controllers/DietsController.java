@@ -2,13 +2,13 @@ package com.github.onechesz.simplediet.controllers;
 
 import com.github.onechesz.simplediet.dto.dtio.DietDTIO;
 import com.github.onechesz.simplediet.dto.dtoo.DietDTOO;
+import com.github.onechesz.simplediet.entities.PersonalDietEntity;
+import com.github.onechesz.simplediet.security.UserDetails;
 import com.github.onechesz.simplediet.services.DietService;
 import com.github.onechesz.simplediet.services.PersonalDietService;
-import com.github.onechesz.simplediet.util.gpt.Response;
 import jakarta.validation.Valid;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.Map;
-import java.util.concurrent.CompletableFuture;
 
 @Controller
 @RequestMapping(value = "/diets")
@@ -99,7 +98,12 @@ public class DietsController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication.isAuthenticated() && !(authentication instanceof AnonymousAuthenticationToken)) {
-            CompletableFuture<Void> future = personalDietService.generatePersonalDiet(preferences, goal, dietTitle, dietDuration, authentication);
+            int userId = ((UserDetails) authentication.getPrincipal()).getId();
+
+            PersonalDietEntity personalDietEntity = personalDietService.createEmptyPersonalDiet(userId, dietDuration);
+
+            if (personalDietEntity != null)
+                personalDietService.sendRequestAndUpdatePersonalDiet(userId, goal, preferences, dietTitle, dietDuration, personalDietEntity);
 
             return "redirect:/diet";
         }

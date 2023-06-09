@@ -9,9 +9,18 @@
 		<div layout:fragment="content">
 			<h1>Моя диета</h1>
 
-			<div th:if="${personal_diet}">
-				<p th:text=${personal_diet.start_time}></p>
-				<p th:text=${personal_diet.duration}></p>
+			<div th:if="${personal_diet == null}">
+				<p>У Вас ещё нет персональной диеты. Сгенерируйте её.</p>
+			</div>
+
+			<div th:if="${personal_diet != null}">
+				<div th:if="${personal_diet.status == 'process'}">
+					<p>Подождите, диета в процессе генерации...</p>
+				</div>
+
+				<div th:if="${personal_diet.status == 'generated'}">
+					<p th:text="${personal_diet.meal}">Еда</p>
+				</div>
 			</div>
 		</div>
 	</body>

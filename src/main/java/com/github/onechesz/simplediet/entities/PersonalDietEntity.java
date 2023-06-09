@@ -34,9 +34,8 @@ public class PersonalDietEntity {
     }
 
     @Contract(pure = true)
-    public PersonalDietEntity(UserEntity userEntity, LocalDateTime startTime, int daysDuration, String status) {
+    public PersonalDietEntity(UserEntity userEntity, int daysDuration, String status) {
         this.userEntity = userEntity;
-        this.startTime = startTime;
         this.daysDuration = daysDuration;
         this.status = status;
     }
