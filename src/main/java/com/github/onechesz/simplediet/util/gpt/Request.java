@@ -11,6 +11,7 @@ public class Request {
 
     @Contract(pure = true)
     public Request() {
+        model = "gpt-3.5-turbo";
         messages = new ArrayList<>(List.of(new Message()));
     }
 

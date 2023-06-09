@@ -16,7 +16,8 @@ public class DietController {
     public String diet(@NotNull Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        if (authentication.isAuthenticated() && !(authentication instanceof AnonymousAuthenticationToken)) return "diet/diet";
+        if (authentication.isAuthenticated() && !(authentication instanceof AnonymousAuthenticationToken))
+            return "diet/diet";
 
         return "redirect:/login";
     }

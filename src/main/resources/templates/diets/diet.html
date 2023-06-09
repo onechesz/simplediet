@@ -24,9 +24,9 @@
 						<option value="lose">Похудение</option>
 					</select>
 
-					<input type="hidden" id="diet_title" name="diet_title" value="${diet.title}">
+					<input type="hidden" id="diet_title" name="diet_title" th:value="${diet.title}">
 
-					<input type="hidden" id="diet_duration" name="diet_duration" value="${diet.duration}">
+					<input type="hidden" id="diet_duration" name="diet_duration" th:value="${diet.duration}">
 
 					<input type="submit" value="сгенерировать план">
 				</form>
