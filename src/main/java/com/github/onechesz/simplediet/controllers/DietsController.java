@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 
 @Controller
 @RequestMapping(value = "/diets")
@@ -98,11 +99,11 @@ public class DietsController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication.isAuthenticated() && !(authentication instanceof AnonymousAuthenticationToken)) {
-            ResponseEntity<Response> responseEntity = personalDietService.generatePersonalDiet(preferences, goal, dietTitle, dietDuration, authentication);
+            CompletableFuture<Void> future = personalDietService.generatePersonalDiet(preferences, goal, dietTitle, dietDuration, authentication);
 
-            System.out.println(responseEntity.getBody());
+            return "redirect:/diet";
         }
 
-        return "redirect:/diet";
+        return "redirect:/login";
     }
 }

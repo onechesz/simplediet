@@ -23,12 +23,34 @@ public class PersonalDietEntity {
     private int daysDuration;
     @Column(name = "completion_reason")
     private String completionReason;
+    @Column(name = "status")
+    private String status;
     @OneToOne(mappedBy = "personalDietEntity")
     private UserEntity currentUserEntity;
 
     @Contract(pure = true)
     public PersonalDietEntity() {
 
+    }
+
+    @Contract(pure = true)
+    public PersonalDietEntity(UserEntity userEntity, LocalDateTime startTime, int daysDuration, String status) {
+        this.userEntity = userEntity;
+        this.startTime = startTime;
+        this.daysDuration = daysDuration;
+        this.status = status;
+    }
+
+    @Contract(pure = true)
+    public PersonalDietEntity(int id, UserEntity userEntity, String meal, LocalDateTime startTime, int daysDuration, String completionReason, String status, UserEntity currentUserEntity) {
+        this.id = id;
+        this.userEntity = userEntity;
+        this.meal = meal;
+        this.startTime = startTime;
+        this.daysDuration = daysDuration;
+        this.completionReason = completionReason;
+        this.status = status;
+        this.currentUserEntity = currentUserEntity;
     }
 
     public int getId() {
@@ -77,6 +99,14 @@ public class PersonalDietEntity {
 
     public void setCompletionReason(String completionReason) {
         this.completionReason = completionReason;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public UserEntity getCurrentUserEntity() {

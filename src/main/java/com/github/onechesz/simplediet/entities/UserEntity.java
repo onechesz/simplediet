@@ -53,7 +53,7 @@ public class UserEntity {
     }
 
     @Contract(pure = true)
-    public UserEntity(int id, String username, String password, String userPassword, String confirmedPassword, String role, UserParametersEntity userParametersEntity, Set<PersonalDietEntity> personalDietEntities) {
+    public UserEntity(int id, String username, String password, String userPassword, String confirmedPassword, String role, UserParametersEntity userParametersEntity, PersonalDietEntity personalDietEntity, Set<PersonalDietEntity> personalDietEntities) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -61,6 +61,7 @@ public class UserEntity {
         this.confirmedPassword = confirmedPassword;
         this.role = role;
         this.userParametersEntity = userParametersEntity;
+        this.personalDietEntity = personalDietEntity;
         this.personalDietEntities = personalDietEntities;
     }
 
@@ -118,6 +119,14 @@ public class UserEntity {
 
     public void setUserParametersEntity(UserParametersEntity userParametersEntity) {
         this.userParametersEntity = userParametersEntity;
+    }
+
+    public PersonalDietEntity getPersonalDietEntity() {
+        return personalDietEntity;
+    }
+
+    public void setPersonalDietEntity(PersonalDietEntity personalDietEntity) {
+        this.personalDietEntity = personalDietEntity;
     }
 
     public Set<PersonalDietEntity> getPersonalDietEntities() {
